@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JewelryShop.Data.Models.Interfaces
+namespace JewelryShop.Data.Models
 {
-    public interface IItem : IProductBase
+    public class PhotoURI
     {
-        public int? SupplierId { get; set; }
-
+        public int Id { get; set; }
+        public string URI { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using JewelryShop.Data.Models.Interfaces;
+﻿using JewelryShop.Data.Models;
 
-namespace JewelryShop.Data.Models.Classes
+namespace JewelryShop.Data.Models
 {
-    public class Material : IMaterial
+    public class Material
     {
         public int Id { get ; set; }
         public string Name { get ; set ; }
@@ -11,7 +11,7 @@ namespace JewelryShop.Data.Models.Classes
         public int? Quantity { get  ; set  ; }
         public string Color { get  ; set  ; }
         public string MaterialName { get  ; set  ; }
-        public string[] PhotosURI { get  ; set  ; }
+        public PhotoURI[] PhotosURI { get  ; set  ; }
         public string? OrderURL { get  ; set  ; }
     }
 }

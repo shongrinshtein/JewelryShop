@@ -1,8 +1,8 @@
-﻿using JewelryShop.Data.Models.Interfaces;
+﻿using JewelryShop.Data.Models;
 
-namespace JewelryShop.Data.Models.Classes
+namespace JewelryShop.Data.Models
 {
-    public class Supplier : ISupplier
+    public class Supplier
     {
         public int Id { get   ; set   ; }
         public string Name { get   ; set   ; }
