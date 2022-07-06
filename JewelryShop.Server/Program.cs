@@ -1,10 +1,15 @@
 using JewelryShop.Data;
+using JewelryShop.Data.Repository;
+using JewelryShop.Data.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<JewelryShopContextDB>(options =>
     options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("JewelryShopDataConnection")));
+
+builder.Services.AddScoped<ICategoryItemRepository, CategoryItemRepository>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
