@@ -29,7 +29,7 @@ namespace JewelryShop.Data.Repository
             if (id == null)
                 throw new ArgumentNullException("id is null"); ;
             var item = await contextDB.Items.FirstOrDefaultAsync(itema => itema.Id == id);
-            if (item == null) throw new ArgumentNullException("photo URI is null"); ;
+            if (item == null) throw new ArgumentNullException("item is null"); ;
             return item;
         }
 
