@@ -28,9 +28,9 @@ namespace JewelryShop.Data.Repository
         {
             if (id == null)
                 throw new ArgumentNullException("id is null"); ;
-            var category = await contextDB.SizeItems.FirstOrDefaultAsync(photo => photo.Id == id);
-            if (category == null) throw new ArgumentNullException("SizeItems is null"); ;
-            return category;
+            var sizeItem = await contextDB.SizeItems.FirstOrDefaultAsync(photo => photo.Id == id);
+            if (sizeItem == null) throw new ArgumentNullException("SizeItems is null"); ;
+            return sizeItem;
         }
 
         public async Task<IEnumerable<SizeItem>> GetAll() => await contextDB.SizeItems.ToListAsync();

@@ -47,8 +47,8 @@ namespace JewelryShop.Data.Repository
         public async Task<bool> Update(SizeProduct sizeProduct)
         {
             if (sizeProduct == null)
-                throw new ArgumentNullException("PhotoURI is null");
-            contextDB.PhotoURIs.Update(sizeProduct);
+                throw new ArgumentNullException("sizeProduct is null");
+            contextDB.SizeProducts.Update(sizeProduct);
             await contextDB.SaveChangesAsync();
             return true;
         }

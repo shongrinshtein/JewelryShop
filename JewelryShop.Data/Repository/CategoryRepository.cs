@@ -47,7 +47,7 @@ namespace JewelryShop.Data.Repository
         public async Task<bool> Update(Category category)
         {
             if (category == null)
-                throw new ArgumentNullException("Animal is null");
+                throw new ArgumentNullException("category is null");
             contextDB.Categories.Update(category);
             await contextDB.SaveChangesAsync();
             return true;
