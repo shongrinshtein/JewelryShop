@@ -2,6 +2,7 @@
 
 namespace JewelryShop.Data.Repository.Interfaces
 {
-    public interface ISizeRepository : IRepository<Size> { }
+    public interface ISizeItemRepository : IRepository<SizeItem> { }
+
 
 }
