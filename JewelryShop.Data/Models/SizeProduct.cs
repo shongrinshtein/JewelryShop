@@ -4,6 +4,6 @@ namespace JewelryShop.Data.Models
 {
     public class SizeProduct :Size
     {
-        public ProductBase[] ProductsBase { get  ; set  ; }
+        public virtual ProductBase[] ProductsBase { get  ; set  ; }
     }
 }

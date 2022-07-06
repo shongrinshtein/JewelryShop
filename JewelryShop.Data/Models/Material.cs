@@ -11,7 +11,7 @@ namespace JewelryShop.Data.Models
         public int? Quantity { get  ; set  ; }
         public string Color { get  ; set  ; }
         public string MaterialName { get  ; set  ; }
-        public PhotoURI[] PhotosURI { get  ; set  ; }
+        public virtual PhotoURI[] PhotosURI { get  ; set  ; }
         public string? OrderURL { get  ; set  ; }
     }
 }

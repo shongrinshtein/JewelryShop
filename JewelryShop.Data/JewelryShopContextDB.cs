@@ -1,6 +1,5 @@
 ﻿using JewelryShop.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Unipluss.Sign.ExternalContract.Entities;
 
 namespace JewelryShop.Data
 {
@@ -19,6 +18,8 @@ namespace JewelryShop.Data
         public virtual DbSet<Material> Materials { get; set; } = null!;
         public virtual DbSet<PhotoURI> PhotoURIs { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<CategoryItem> CategoryItems { get; set; } = null!;
+        public virtual DbSet<CategoryProduct> CategoryProducts { get; set; } = null!;
         public virtual DbSet<Size> Sizes { get; set; } = null!;
         public virtual DbSet<ProductBase> ProductBases{ get; set; } = null!;
         public virtual DbSet<Supplier> Suppliers { get; set; } = null!;
