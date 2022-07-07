@@ -9,6 +9,10 @@ builder.Services.AddDbContext<JewelryShopContextDB>(options =>
     options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("JewelryShopDataConnection")));
 
 builder.Services.AddScoped<ICategoryItemRepository, CategoryItemRepository>();
+builder.Services.AddScoped<ICategoryProductRepository, CategoryProductRepository>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped<IPhotoURIRepository, PhotoURIRepository>();
+builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
 
 
 builder.Services.AddControllers();

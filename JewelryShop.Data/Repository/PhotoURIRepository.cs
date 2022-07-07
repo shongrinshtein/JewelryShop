@@ -35,13 +35,13 @@ namespace JewelryShop.Data.Repository
 
         public async Task<IEnumerable<PhotoURI>> GetAll() => await contextDB.PhotoURIs.ToListAsync();
 
-        public async Task<int> Insert(PhotoURI photoURI)
+        public async Task<PhotoURI> Insert(PhotoURI photoURI)
         {
             if (photoURI == null)
                 throw new ArgumentNullException("photoURI is null");
             await contextDB.PhotoURIs.AddAsync(photoURI);
             await contextDB.SaveChangesAsync();
-            return photoURI.Id;
+            return photoURI;
         }
 
         public async Task<bool> Update(PhotoURI photoURI)

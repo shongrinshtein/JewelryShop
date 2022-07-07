@@ -8,7 +8,7 @@ namespace JewelryShop.Data.Repository.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        Task<int> Insert(T item);
+        Task<T> Insert(T item);
         Task<bool> Update(T item);
         Task<bool> Delete(int? id);
         Task<T> Get(int? id);

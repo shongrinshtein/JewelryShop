@@ -8,52 +8,52 @@ using Microsoft.EntityFrameworkCore;
 using JewelryShop.Data;
 using JewelryShop.Data.Models;
 using JewelryShop.Data.Repository.Interfaces;
-using JewelryShop.Data.Repository;
 
 namespace JewelryShop.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryItemsController : ControllerBase
+    public class MaterialsController : ControllerBase
     {
-        private readonly ICategoryItemRepository itemRepos;
+        private readonly IMaterialRepository materialRepository;
 
-        public CategoryItemsController(ICategoryItemRepository itemRepos)
+        public MaterialsController(IMaterialRepository productRepos)
         {
-            this.itemRepos = itemRepos;
+            this.materialRepository = productRepos;
         }
 
-        // GET: api/CategoryItems
+        // GET: api/Materials
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItems() => Ok(await itemRepos.GetAll());
+        public async Task<ActionResult<IEnumerable<Material>>> GetMaterials() => Ok(await materialRepository.GetAll());
 
-        // GET: api/CategoryItems/5
+        // GET: api/Materials/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryItem>> GetCategoryItem(int id)
+        public async Task<ActionResult<Material>> GetMaterial(int id)
         {
             try
             {
-                return await itemRepos.Get(id);
+                return await materialRepository.Get(id);
             }
             catch
             {
                 return NotFound();
             }
+
         }
 
-        // PUT: api/CategoryItems/5
+        // PUT: api/Materials/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoryItem(int id, CategoryItem categoryItem)
+        public async Task<IActionResult> PutMaterial(int id, Material material)
         {
-            if (id != categoryItem.Id)
+            if (id != material.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                 await itemRepos.Update(categoryItem);
+                await materialRepository.Update(material);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -63,14 +63,14 @@ namespace JewelryShop.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/CategoryItems
+        // POST: api/Materials
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CategoryItem>> PostCategoryItem(CategoryItem categoryItem)
+        public async Task<ActionResult<Material>> PostMaterial(Material material)
         {
             try
             {
-                return await itemRepos.Insert(categoryItem);
+                return await materialRepository.Insert(material);
             }
             catch (Exception e)
             {
@@ -79,13 +79,13 @@ namespace JewelryShop.Server.Controllers
             }
         }
 
-        // DELETE: api/CategoryItems/5
+        // DELETE: api/Materials/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategoryItem(int id)
+        public async Task<IActionResult> DeleteMaterial(int id)
         {
             try
             {
-                await itemRepos.Delete(id);
+                await materialRepository.Delete(id);
             }
             catch (Exception e)
             {
@@ -93,6 +93,5 @@ namespace JewelryShop.Server.Controllers
             }
             return NotFound();
         }
-
     }
 }

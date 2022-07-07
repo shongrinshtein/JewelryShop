@@ -8,52 +8,53 @@ using Microsoft.EntityFrameworkCore;
 using JewelryShop.Data;
 using JewelryShop.Data.Models;
 using JewelryShop.Data.Repository.Interfaces;
-using JewelryShop.Data.Repository;
 
 namespace JewelryShop.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryItemsController : ControllerBase
+    public class PhotoURIsController : ControllerBase
     {
-        private readonly ICategoryItemRepository itemRepos;
+        private readonly IPhotoURIRepository photoURIRepository;
 
-        public CategoryItemsController(ICategoryItemRepository itemRepos)
+        public PhotoURIsController(IPhotoURIRepository photoURIRepository)
         {
-            this.itemRepos = itemRepos;
+            this.photoURIRepository = photoURIRepository;
         }
 
-        // GET: api/CategoryItems
+        // GET: api/PhotoURIs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItems() => Ok(await itemRepos.GetAll());
+        public async Task<ActionResult<IEnumerable<PhotoURI>>> GetPhotoURIs() => Ok(await photoURIRepository.GetAll());
+        // GET: api/CategoryProducts/5
 
-        // GET: api/CategoryItems/5
+        // GET: api/PhotoURIs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryItem>> GetCategoryItem(int id)
+        public async Task<ActionResult<PhotoURI>> GetPhotoURI(int id)
         {
             try
             {
-                return await itemRepos.Get(id);
+                return await photoURIRepository.Get(id);
             }
             catch
             {
                 return NotFound();
             }
+
         }
 
-        // PUT: api/CategoryItems/5
+        // PUT: api/PhotoURIs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoryItem(int id, CategoryItem categoryItem)
+        public async Task<IActionResult> PutPhotoURI(int id, PhotoURI photoURI)
         {
-            if (id != categoryItem.Id)
+            if (id != photoURI.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                 await itemRepos.Update(categoryItem);
+                await photoURIRepository.Update(photoURI);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -63,14 +64,14 @@ namespace JewelryShop.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/CategoryItems
+        // POST: api/PhotoURIs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CategoryItem>> PostCategoryItem(CategoryItem categoryItem)
+        public async Task<ActionResult<PhotoURI>> PostPhotoURI(PhotoURI photoURI)
         {
             try
             {
-                return await itemRepos.Insert(categoryItem);
+                return await photoURIRepository.Insert(photoURI);
             }
             catch (Exception e)
             {
@@ -79,13 +80,13 @@ namespace JewelryShop.Server.Controllers
             }
         }
 
-        // DELETE: api/CategoryItems/5
+        // DELETE: api/PhotoURIs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategoryItem(int id)
+        public async Task<IActionResult> DeletePhotoURI(int id)
         {
             try
             {
-                await itemRepos.Delete(id);
+                await photoURIRepository.Delete(id);
             }
             catch (Exception e)
             {

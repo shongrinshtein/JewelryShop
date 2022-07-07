@@ -8,28 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using JewelryShop.Data;
 using JewelryShop.Data.Models;
 using JewelryShop.Data.Repository.Interfaces;
-using JewelryShop.Data.Repository;
 
 namespace JewelryShop.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryItemsController : ControllerBase
+    public class ItemsController : ControllerBase
     {
-        private readonly ICategoryItemRepository itemRepos;
+        private readonly IItemRepository itemRepos;
 
-        public CategoryItemsController(ICategoryItemRepository itemRepos)
+        public ItemsController(IItemRepository itemRepos)
         {
             this.itemRepos = itemRepos;
         }
 
-        // GET: api/CategoryItems
+        // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItems() => Ok(await itemRepos.GetAll());
-
-        // GET: api/CategoryItems/5
+        public async Task<ActionResult<IEnumerable<Item>>> GetItems() =>Ok(await itemRepos.GetAll());
+        // GET: api/Items/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryItem>> GetCategoryItem(int id)
+        public async Task<ActionResult<Item>> GetItem(int id)
         {
             try
             {
@@ -41,19 +39,19 @@ namespace JewelryShop.Server.Controllers
             }
         }
 
-        // PUT: api/CategoryItems/5
+        // PUT: api/Items/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoryItem(int id, CategoryItem categoryItem)
+        public async Task<IActionResult> PutItem(int id, Item item)
         {
-            if (id != categoryItem.Id)
+            if (id != item.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                 await itemRepos.Update(categoryItem);
+                await itemRepos.Update(item);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -61,16 +59,17 @@ namespace JewelryShop.Server.Controllers
             }
 
             return NoContent();
+
         }
 
-        // POST: api/CategoryItems
+        // POST: api/Items
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CategoryItem>> PostCategoryItem(CategoryItem categoryItem)
+        public async Task<ActionResult<Item>> PostItem(Item item)
         {
             try
             {
-                return await itemRepos.Insert(categoryItem);
+                return await itemRepos.Insert(item);
             }
             catch (Exception e)
             {
@@ -79,9 +78,9 @@ namespace JewelryShop.Server.Controllers
             }
         }
 
-        // DELETE: api/CategoryItems/5
+        // DELETE: api/Items/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategoryItem(int id)
+        public async Task<IActionResult> DeleteItem(int id)
         {
             try
             {
@@ -92,6 +91,7 @@ namespace JewelryShop.Server.Controllers
                 throw e;
             }
             return NotFound();
+
         }
 
     }
