@@ -13,6 +13,11 @@ builder.Services.AddScoped<ICategoryProductRepository, CategoryProductRepository
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IPhotoURIRepository, PhotoURIRepository>();
 builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
+builder.Services.AddScoped<IPhotoURIRepository, PhotoURIRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ISizeItemRepository, SizeItemRepository>();
+builder.Services.AddScoped<ISizeProductRepository, SizeProductRepository>();
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
 
 builder.Services.AddControllers();
