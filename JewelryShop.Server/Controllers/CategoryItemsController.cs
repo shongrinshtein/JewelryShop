@@ -18,10 +18,7 @@ namespace JewelryShop.Server.Controllers
     {
         private readonly ICategoryItemRepository itemRepos;
 
-        public CategoryItemsController(ICategoryItemRepository itemRepos)
-        {
-            this.itemRepos = itemRepos;
-        }
+        public CategoryItemsController(ICategoryItemRepository itemRepos) => this.itemRepos = itemRepos;
 
         // GET: api/CategoryItems
         [HttpGet]
