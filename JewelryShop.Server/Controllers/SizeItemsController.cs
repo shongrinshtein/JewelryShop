@@ -13,24 +13,26 @@ namespace JewelryShop.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PhotoURIsController : ControllerBase
+    public class SizeItemsController : ControllerBase
     {
-        private readonly IPhotoURIRepository photoURIRepository;
+        private readonly ISizeItemRepository sizeItemRepository;
 
-        public PhotoURIsController(IPhotoURIRepository photoURIRepository) => this.photoURIRepository = photoURIRepository;
+        public SizeItemsController(ISizeItemRepository sizeItemRepository)
+        {
+            this.sizeItemRepository = sizeItemRepository;
+        }
 
-        // GET: api/PhotoURIs
+        // GET: api/SizeItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PhotoURI>>> GetPhotoURIs() => Ok(await photoURIRepository.GetAll());
-        // GET: api/CategoryProducts/5
+        public async Task<ActionResult<IEnumerable<SizeItem>>> GetSizeItems() => Ok(await sizeItemRepository.GetAll());
 
-        // GET: api/PhotoURIs/5
+        // GET: api/SizeItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PhotoURI>> GetPhotoURI(int id)
+        public async Task<ActionResult<SizeItem>> GetSizeItem(int id)
         {
             try
             {
-                return await photoURIRepository.Get(id);
+                return await sizeItemRepository.Get(id);
             }
             catch
             {
@@ -39,19 +41,19 @@ namespace JewelryShop.Server.Controllers
 
         }
 
-        // PUT: api/PhotoURIs/5
+        // PUT: api/SizeItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPhotoURI(int id, PhotoURI photoURI)
+        public async Task<IActionResult> PutSizeItem(int id, SizeItem sizeItem)
         {
-            if (id != photoURI.Id)
+            if (id != sizeItem.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                await photoURIRepository.Update(photoURI);
+                await sizeItemRepository.Update(sizeItem);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -61,14 +63,14 @@ namespace JewelryShop.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/PhotoURIs
+        // POST: api/SizeItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<PhotoURI>> PostPhotoURI(PhotoURI photoURI)
+        public async Task<ActionResult<SizeItem>> PostSizeItem(SizeItem sizeItem)
         {
             try
             {
-                return await photoURIRepository.Insert(photoURI);
+                return await sizeItemRepository.Insert(sizeItem);
             }
             catch (Exception e)
             {
@@ -77,13 +79,13 @@ namespace JewelryShop.Server.Controllers
             }
         }
 
-        // DELETE: api/PhotoURIs/5
+        // DELETE: api/SizeItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePhotoURI(int id)
+        public async Task<IActionResult> DeleteSizeItem(int id)
         {
             try
             {
-                await photoURIRepository.Delete(id);
+                await sizeItemRepository.Delete(id);
             }
             catch (Exception e)
             {
