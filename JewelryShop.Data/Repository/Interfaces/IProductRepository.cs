@@ -2,6 +2,8 @@
 
 namespace JewelryShop.Data.Repository.Interfaces
 {
-    public interface IProductRepository : IRepository<Product> { }
+    public interface IProductRepository : IRepository<Product>
+    {
+    }
 
 }

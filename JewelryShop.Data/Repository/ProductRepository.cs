@@ -22,7 +22,7 @@ namespace JewelryShop.Data.Repository
             contextDB.Products.Remove(product);
             await contextDB.SaveChangesAsync();
             return true;
-        }
+        }        
 
         public async Task<Product> Get(int? id)
         {

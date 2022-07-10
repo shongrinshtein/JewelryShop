@@ -22,7 +22,8 @@ namespace JewelryShop.Server.Controllers
 
         // GET: api/Suppliers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Supplier>>> GetSuppliers() => Ok(await supplierService.GetAll());
+        public async Task<ActionResult<IEnumerable<Supplier>>> GetSuppliers() => throw new NotImplementedException();
+
         // GET: api/Suppliers/5
         [HttpGet]
         public async Task<ActionResult<Material>> GetSupplierssByIndex([FromQuery] int index)
@@ -48,7 +49,7 @@ namespace JewelryShop.Server.Controllers
         // PUT: api/Suppliers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSupplier(int id, Supplier supplier)
+        public async Task<ActionResult<bool>> PutSupplier(int id, Supplier supplier)
         {
             if (id != supplier.Id)
             {
@@ -85,7 +86,7 @@ namespace JewelryShop.Server.Controllers
 
         // DELETE: api/Suppliers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSupplier(int id)
+        public async Task<ActionResult<bool>> DeleteSupplier(int id)
         {
             try
             {

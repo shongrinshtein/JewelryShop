@@ -47,7 +47,7 @@ namespace JewelryShop.Server.Controllers
         // PUT: api/CategoryProducts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoryProduct( CategoryProduct categoryProduct)
+        public async Task<ActionResult<bool>> PutCategoryProduct( CategoryProduct categoryProduct)
         {
             try
             {
@@ -80,11 +80,11 @@ namespace JewelryShop.Server.Controllers
 
         // DELETE: api/CategoryProducts/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategoryProduct(int id)
+        public async Task<ActionResult<bool>> DeleteCategoryProduct(int id)
         {
             try
             {
-                await productRepos.Delete(id);
+                return await productRepos.Delete(id);
             }
             catch (Exception e)
             {

@@ -22,7 +22,7 @@ namespace JewelryShop.Server.Controllers
 
         // GET: api/CategoryItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItems() => Ok(await categoryItemsRepos.GetAll());
+        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItems() => throw new NotImplementedException();
         [HttpGet]
 
         public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItemByIndex([FromQuery] int index)
@@ -47,7 +47,7 @@ namespace JewelryShop.Server.Controllers
         // PUT: api/CategoryItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoryItem( CategoryItem categoryItem)
+        public async Task<ActionResult<bool>> PutCategoryItem( CategoryItem categoryItem)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace JewelryShop.Server.Controllers
 
         // DELETE: api/CategoryItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategoryItem(int id)
+        public async Task<ActionResult<bool>> DeleteCategoryItem(int id)
         {
             try
             {

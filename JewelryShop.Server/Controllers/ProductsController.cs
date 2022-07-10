@@ -22,7 +22,8 @@ namespace JewelryShop.Server.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAll() => Ok(await productService.GetAll());
+        public async Task<ActionResult<IEnumerable<Product>>> GetAll() => throw new NotImplementedException();
+
 
         [HttpGet]
         public async Task<ActionResult<Material>> GetByIndex([FromQuery] int index)
@@ -48,7 +49,7 @@ namespace JewelryShop.Server.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(Product product)
+        public async Task<ActionResult<bool>> PutProduct(Product product)
         {
             try
             {
@@ -80,17 +81,6 @@ namespace JewelryShop.Server.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
-        {
-            try
-            {
-                await productService.Delete(id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return NotFound();
-        }
+        public async Task<ActionResult<bool>> DeleteProduct(int id) => await productService.Delete(id);
     }
 }

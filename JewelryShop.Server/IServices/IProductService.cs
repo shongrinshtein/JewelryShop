@@ -2,5 +2,7 @@
 
 namespace JewelryShop.Server.IServices
 {
-    public interface IProductService:IService<Product>{}
+    public interface IProductService : IService<Product>
+    {
+    }
 }

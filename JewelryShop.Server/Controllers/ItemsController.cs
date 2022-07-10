@@ -21,7 +21,7 @@ namespace JewelryShop.Server.Controllers
 
         // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Item>>> GetItems() =>Ok(await itemRepos.GetAll());
+        public async Task<ActionResult<IEnumerable<Item>>> GetItems() => throw new NotImplementedException();
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> GetItemsByIndex([FromQuery]int index)
         {
