@@ -7,7 +7,12 @@ namespace JewelryShop.Server.Services
     public class CategoryItemService : ICategoryItemService
     {
         private readonly ICategoryItemRepository categoryItemRepos;
-        public CategoryItemService(ICategoryItemRepository categoryItemRepos) => this.categoryItemRepos = categoryItemRepos;
+        private readonly IItemRepository itemRepos;
+        public CategoryItemService(ICategoryItemRepository categoryItemRepos, IItemRepository itemRepos)
+        {
+            this.itemRepos = itemRepos;
+            this.categoryItemRepos = categoryItemRepos;
+        }
         public async Task<bool> Delete(int? id) => await categoryItemRepos.Delete(id);
 
         public Task<CategoryItem> Get(int? id)=> categoryItemRepos.Get(id);
