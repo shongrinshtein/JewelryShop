@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-=======
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6">
@@ -22,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JewelryShop.Data\JewelryShop.Data.csproj" />
->>>>>>> ca04037dcb29c706f0cf6abfaaabb564db20b5ed
   </ItemGroup>
 
 </Project>
