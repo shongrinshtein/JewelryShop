@@ -33,7 +33,14 @@ namespace JewelryShop.Data.Repository
             return item;
         }
 
-        public async Task<IEnumerable<Item>> GetAll() => await contextDB.Items.ToListAsync();
+        public async Task<IEnumerable<Item>> GetAll() => throw new NotImplementedException();
+
+        public async Task<IEnumerable<Item>> GetByIndex(int index, int manyInPage)
+        {
+            Range range = new Range((index - 1) * manyInPage, index * (manyInPage));
+            return contextDB.Items.Take<Item>(range);
+        }
+
         public async Task<Item> Insert(Item item)
         {
             if (item == null)

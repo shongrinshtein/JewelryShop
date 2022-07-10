@@ -35,6 +35,12 @@ namespace JewelryShop.Data.Repository
 
         public async Task<IEnumerable<PhotoURI>> GetAll() => await contextDB.PhotoURIs.ToListAsync();
 
+        public async Task<IEnumerable<PhotoURI>> GetByIndex(int index, int manyInPage)
+        {
+            Range range = new Range((index - 1) * manyInPage, index * (manyInPage));
+            return contextDB.PhotoURIs.Take<PhotoURI>(range);
+        }
+
         public async Task<PhotoURI> Insert(PhotoURI photoURI)
         {
             if (photoURI == null)

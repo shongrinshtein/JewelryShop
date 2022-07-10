@@ -34,6 +34,11 @@ namespace JewelryShop.Data.Repository
 
         public async Task<IEnumerable<CategoryProduct>> GetAll() => await contextDB.CategoryProducts.ToListAsync();
 
+        public async Task<IEnumerable<CategoryProduct>> GetByIndex(int index, int manyInPage)
+        {
+            Range range = new Range((index - 1) * manyInPage, index * (manyInPage));
+            return contextDB.CategoryProducts.Take<CategoryProduct>(range);
+        }
 
         public async Task<CategoryProduct> Insert(CategoryProduct category)
         {
