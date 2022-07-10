@@ -23,13 +23,13 @@ namespace JewelryShop.Server.Controllers
         // GET: api/CategoryItems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItems() => throw new NotImplementedException();
-        [HttpGet]
+        //[HttpGet]
 
-        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItemByIndex([FromQuery] int index)
-        {
-            int manyInPage = 15;
-            return Ok(await categoryItemsRepos.GetByIndex(index, manyInPage));
-        }
+        //public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItemByIndex([FromQuery] int index)
+        //{
+        //    int manyInPage = 15;
+        //    return Ok(await categoryItemsRepos.GetByIndex(index, manyInPage));
+        //}
         // GET: api/CategoryItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryItem>> GetCategoryItem(int id)

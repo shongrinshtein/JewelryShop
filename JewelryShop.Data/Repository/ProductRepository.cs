@@ -35,6 +35,9 @@ namespace JewelryShop.Data.Repository
 
         public async Task<IEnumerable<Product>> GetAll() => await contextDB.Products.ToListAsync();
 
+        public async Task<IEnumerable<Product>> GetByCategory(Category categoryProduct)=>
+                                  await contextDB.Products.Where(product => product.Categories.Contains(categoryProduct)).ToListAsync();
+
         public async Task<IEnumerable<Product>> GetByIndex(int index, int manyInPage)
         {
             Range range = new Range((index - 1) * manyInPage, index * (manyInPage));

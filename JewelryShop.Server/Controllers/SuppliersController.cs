@@ -25,12 +25,12 @@ namespace JewelryShop.Server.Controllers
         public async Task<ActionResult<IEnumerable<Supplier>>> GetSuppliers() => throw new NotImplementedException();
 
         // GET: api/Suppliers/5
-        [HttpGet]
-        public async Task<ActionResult<Material>> GetSupplierssByIndex([FromQuery] int index)
-        {
-            int manyInPage = 15;
-            return Ok(await supplierService.GetByIndex(index, manyInPage));
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<Supplier>> GetSupplierssByIndex([FromQuery] int index)
+        //{
+        //    int manyInPage = 15;
+        //    return Ok(await supplierService.GetByIndex(index, manyInPage));
+        //}
 
 
         [HttpGet("{id}")]
