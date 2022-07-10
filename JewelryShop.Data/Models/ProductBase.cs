@@ -6,10 +6,10 @@ namespace JewelryShop.Data.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Category[] Categories { get; set; }
+        public virtual Category[] Categories { get; set; }
         public string? Description { get; set; }
-        public Size[] Sizes { get; set; }
-        public PhotoURI[] PhotosURI { get; set; }
+        public virtual Size[] Sizes { get; set; }
+        public virtual PhotoURI[] PhotosURI { get; set; }
 
     }
 }

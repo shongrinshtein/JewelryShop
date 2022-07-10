@@ -4,6 +4,6 @@ namespace JewelryShop.Data.Models
 {
     public class Item : ProductBase
     {
-        public Supplier Supplier { get   ; set   ; }
+        public virtual Supplier Supplier { get   ; set   ; }
     }
 }

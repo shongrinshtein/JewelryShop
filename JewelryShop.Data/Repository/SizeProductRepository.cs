@@ -35,13 +35,13 @@ namespace JewelryShop.Data.Repository
 
         public async Task<IEnumerable<SizeProduct>> GetAll() => await contextDB.SizeProducts.ToListAsync();
 
-        public async Task<int> Insert(SizeProduct sizeProduct)
+        public async Task<SizeProduct> Insert(SizeProduct sizeProduct)
         {
             if (sizeProduct == null)
                 throw new ArgumentNullException("sizeProduct is null");
             await contextDB.SizeProducts.AddAsync(sizeProduct);
             await contextDB.SaveChangesAsync();
-            return sizeProduct.Id;
+            return sizeProduct;
         }
 
         public async Task<bool> Update(SizeProduct sizeProduct)
