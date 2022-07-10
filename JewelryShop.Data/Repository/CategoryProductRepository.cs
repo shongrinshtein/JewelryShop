@@ -36,6 +36,7 @@ namespace JewelryShop.Data.Repository
 
         public async Task<IEnumerable<CategoryProduct>> GetByIndex(int index, int manyInPage)
         {
+            if (index == null || index < 0 || manyInPage == null || manyInPage < 0) return null;
             Range range = new Range((index - 1) * manyInPage, index * (manyInPage));
             return contextDB.CategoryProducts.Take<CategoryProduct>(range);
         }

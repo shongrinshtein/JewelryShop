@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JewelryShop.Data;
 using JewelryShop.Data.Models;
 using JewelryShop.Data.Repository.Interfaces;
+using JewelryShop.Server.IServices;
 
 namespace JewelryShop.Server.Controllers
 {
@@ -15,13 +16,13 @@ namespace JewelryShop.Server.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository ProductRepository;
+        private readonly ISupplierService supplierService;
 
-        public ProductsController(IProductRepository context) => ProductRepository = context;
+        public ProductsController(ISupplierService supplierService) => this.supplierService = supplierService;
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts() => Ok(await ProductRepository.GetAll());
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts() => Ok(await supplierService.GetSuppliers());
 
         [HttpGet]
         public async Task<ActionResult<Material>> GetProductsByIndex([FromQuery] int index)

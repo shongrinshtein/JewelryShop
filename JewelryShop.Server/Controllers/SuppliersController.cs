@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JewelryShop.Data;
 using JewelryShop.Data.Models;
 using JewelryShop.Data.Repository.Interfaces;
+using JewelryShop.Server.IServices;
 
 namespace JewelryShop.Server.Controllers
 {
@@ -15,9 +16,9 @@ namespace JewelryShop.Server.Controllers
     [ApiController]
     public class SuppliersController : ControllerBase
     {
-        private readonly ISupplierRepository supplierRepository;
+        private readonly ISupplierService supplierService;
 
-        public SuppliersController(ISupplierRepository supplierRepository) => this.supplierRepository = supplierRepository;
+        public SuppliersController(ISupplierService supplierService) => this.supplierService = supplierService;
 
         // GET: api/Suppliers
         [HttpGet]
