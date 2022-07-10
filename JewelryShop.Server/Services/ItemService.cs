@@ -7,13 +7,48 @@ namespace JewelryShop.Server.Services
     public class ItemService : IItemService
     {
         private readonly IItemRepository itemRepository;
-        public ItemService(IItemRepository itemRepository) =>
-                            this.itemRepository = itemRepository;
+        private readonly ISizeItemRepository sizeItemRepository;
+        private readonly IPhotoURIRepository photoURIRepository;
+        private readonly ICategoryItemRepository categoryItem;
+        public ItemService(ISizeItemRepository sizeItemRepository, IItemRepository itemRepository,IPhotoURIRepository photoURIRepository, ICategoryItemRepository categoryItem)
+        {
+            this.categoryItem = categoryItem;
+            this.photoURIRepository = photoURIRepository;
+            this.sizeItemRepository = sizeItemRepository;
+            this.itemRepository = itemRepository;
+        }
         public async Task<bool> Delete(int? id)
         {
-            return await itemRepository.Delete(id);
-        }
+            try
+            {
+                var tempItem = itemRepository.Get(id);
+                if (tempItem == null) throw new NullReferenceException();
+                var item = tempItem.Result;
+                foreach (var size in item.Sizes)
+                {
+                    sizeItemRepository.Delete(size.Id);
+                }
+                foreach (var photo in item.PhotosURI)
+                {
+                    //left to delete photo memory
+                    photoURIRepository.Delete(photo.Id);
+                }
+                foreach (var category in item.Categories)
+                {
+                    if (itemRepository.GetByCategory(category)==null)
+                        categoryItem.Delete(category.Id);
 
+                }
+                return await itemRepository.Delete(id);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
         public async Task<Item> Get(int? id)
         {
             return await this.itemRepository.Get(id);

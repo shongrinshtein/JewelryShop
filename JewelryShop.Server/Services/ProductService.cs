@@ -19,23 +19,24 @@ namespace JewelryShop.Server.Services
         {
             try
             {
-                var product = productRepository.Get(id).Result;
+                var tempProduct = productRepository.Get(id);
+                if (tempProduct == null) throw new NullReferenceException();
+                var product = tempProduct.Result;
                 foreach (var size in product.Sizes)
                 {
                     sizeProductRepos.Delete(size.Id);
                 }
                 foreach (var photo in product.PhotosURI)
                 {
+                    //left to delete photo memory
                     photoURIRepository.Delete(photo.Id);
                 }
                 return productRepository.Delete(id);
-
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
         }

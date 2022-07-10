@@ -2,6 +2,10 @@
 
 namespace JewelryShop.Data.Repository.Interfaces
 {
-    public interface IItemRepository : IRepository<Item> { }
+    public interface IItemRepository : IRepository<Item>
+    {
+        Task<IEnumerable<Item>> GetByCategory(Category categoryItem);
+
+    }
 
 }

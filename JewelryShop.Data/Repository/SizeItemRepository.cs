@@ -17,9 +17,9 @@ namespace JewelryShop.Data.Repository
         public async Task<bool> Delete(int? id)
         {
             if (id == null) return false;
-            var photoURI = await contextDB.PhotoURIs.FindAsync(id);
-            if (photoURI == null) return false;
-            contextDB.PhotoURIs.Remove(photoURI);
+            var sizeItem = await contextDB.SizeItems.FindAsync(id);
+            if (sizeItem == null) return false;
+            contextDB.SizeItems.Remove(sizeItem);
             await contextDB.SaveChangesAsync();
             return true;
         }
