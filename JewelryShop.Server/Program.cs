@@ -1,13 +1,15 @@
 using JewelryShop.Data;
 using JewelryShop.Data.Repository;
 using JewelryShop.Data.Repository.Interfaces;
+using JewelryShop.Server.IServices;
+using JewelryShop.Server.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<JewelryShopContextDB>(options =>
     options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("JewelryShopDataConnection")));
-
+//repos
 builder.Services.AddScoped<ICategoryItemRepository, CategoryItemRepository>();
 builder.Services.AddScoped<ICategoryProductRepository, CategoryProductRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
@@ -17,6 +19,16 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ISizeItemRepository, SizeItemRepository>();
 builder.Services.AddScoped<ISizeProductRepository, SizeProductRepository>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+//services
+builder.Services.AddScoped<ICategoryItemService,CategoryItemService>();
+builder.Services.AddScoped<ICategoryProductService,CategoryProductService>();
+builder.Services.AddScoped<IItemService, ItemService>();
+builder.Services.AddScoped<IMaterialService, MaterialService>();
+builder.Services.AddScoped<IPhotoURIService, PhotoURIService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ISizeItemService, SizeItemService>();
+builder.Services.AddScoped<ISizeProductService, SizeProductService>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 
 builder.Services.AddControllers();
