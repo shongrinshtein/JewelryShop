@@ -16,19 +16,19 @@ namespace JewelryShop.Server.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ISupplierService supplierService;
+        private readonly IProductService productService;
 
-        public ProductsController(ISupplierService supplierService) => this.supplierService = supplierService;
+        public ProductsController(IProductService productService) => this.productService = productService;
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts() => Ok(await supplierService.GetSuppliers());
+        public async Task<ActionResult<IEnumerable<Product>>> GetAll() => Ok(await productService.GetAll());
 
         [HttpGet]
-        public async Task<ActionResult<Material>> GetProductsByIndex([FromQuery] int index)
+        public async Task<ActionResult<Material>> GetByIndex([FromQuery] int index)
         {
             int manyInPage = 15;
-            return Ok(await ProductRepository.GetByIndex(index, manyInPage));
+            return Ok(await productService.GetByIndex(index, manyInPage));
         }
 
         // GET: api/Products/5
@@ -37,7 +37,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                return await ProductRepository.Get(id);
+                return await productService.Get(id);
             }
             catch
             {
@@ -52,7 +52,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                await ProductRepository.Update(product);
+                await productService.Update(product);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,7 +69,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                return await ProductRepository.Insert(product);
+                return await productService.Insert(product);
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                await ProductRepository.Delete(id);
+                await productService.Delete(id);
             }
             catch (Exception e)
             {

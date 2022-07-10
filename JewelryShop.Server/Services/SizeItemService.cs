@@ -18,11 +18,8 @@ namespace JewelryShop.Server.Services
         public async Task<IEnumerable<SizeItem>> GetByIndex(int index, int manyInPage) => 
                                 await sizeItemRepository.GetByIndex(index, manyInPage);
 
-        public Task<SizeItem> Insert(SizeItem item) => await sizeItemRepository.Insert(item);
+        public async Task<SizeItem> Insert(SizeItem item) => await sizeItemRepository.Insert(item);
 
-        public Task<bool> Update(SizeItem item)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<bool> Update(SizeItem item) => await sizeItemRepository.Update(item);
     }
 }

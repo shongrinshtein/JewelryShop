@@ -22,13 +22,13 @@ namespace JewelryShop.Server.Controllers
 
         // GET: api/Suppliers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Supplier>>> GetSuppliers() => Ok(await supplierRepository.GetAll());
+        public async Task<ActionResult<IEnumerable<Supplier>>> GetSuppliers() => Ok(await supplierService.GetAll());
         // GET: api/Suppliers/5
         [HttpGet]
         public async Task<ActionResult<Material>> GetSupplierssByIndex([FromQuery] int index)
         {
             int manyInPage = 15;
-            return Ok(await supplierRepository.GetByIndex(index, manyInPage));
+            return Ok(await supplierService.GetByIndex(index, manyInPage));
         }
 
 
@@ -37,7 +37,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                return await supplierRepository.Get(id);
+                return await supplierService.Get(id);
             }
             catch
             {
@@ -57,7 +57,7 @@ namespace JewelryShop.Server.Controllers
 
             try
             {
-                await supplierRepository.Update(supplier);
+                await supplierService.Update(supplier);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -74,7 +74,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                return await supplierRepository.Insert(supplier);
+                return await supplierService.Insert(supplier);
             }
             catch (Exception e)
             {
@@ -89,7 +89,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                await supplierRepository.Delete(id);
+                await supplierService.Delete(id);
             }
             catch (Exception e)
             {
