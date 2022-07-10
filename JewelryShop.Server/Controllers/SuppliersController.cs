@@ -17,15 +17,20 @@ namespace JewelryShop.Server.Controllers
     {
         private readonly ISupplierRepository supplierRepository;
 
-        public SuppliersController(ISupplierRepository supplierRepository)
-        {
-            this.supplierRepository = supplierRepository;
-        }
+        public SuppliersController(ISupplierRepository supplierRepository) => this.supplierRepository = supplierRepository;
 
         // GET: api/Suppliers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Supplier>>> GetSuppliers() => Ok(await supplierRepository.GetAll());
         // GET: api/Suppliers/5
+        [HttpGet]
+        public async Task<ActionResult<Material>> GetSupplierssByIndex([FromQuery] int index)
+        {
+            int manyInPage = 15;
+            return Ok(await supplierRepository.GetByIndex(index, manyInPage));
+        }
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Supplier>> GetSupplier(int id)
         {

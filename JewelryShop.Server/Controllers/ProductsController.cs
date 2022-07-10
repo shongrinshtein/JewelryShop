@@ -23,6 +23,13 @@ namespace JewelryShop.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts() => Ok(await ProductRepository.GetAll());
 
+        [HttpGet]
+        public async Task<ActionResult<Material>> GetProductsByIndex([FromQuery] int index)
+        {
+            int manyInPage = 15;
+            return Ok(await ProductRepository.GetByIndex(index, manyInPage));
+        }
+
         // GET: api/Products/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
@@ -40,13 +47,8 @@ namespace JewelryShop.Server.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        public async Task<IActionResult> PutProduct(Product product)
         {
-            if (id != product.Id)
-            {
-                return BadRequest();
-            }
-
             try
             {
                 await ProductRepository.Update(product);

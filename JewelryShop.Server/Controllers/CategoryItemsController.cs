@@ -16,21 +16,27 @@ namespace JewelryShop.Server.Controllers
     [ApiController]
     public class CategoryItemsController : ControllerBase
     {
-        private readonly ICategoryItemRepository itemRepos;
+        private readonly ICategoryItemRepository categoryItemsRepos;
 
-        public CategoryItemsController(ICategoryItemRepository itemRepos) => this.itemRepos = itemRepos;
+        public CategoryItemsController(ICategoryItemRepository itemRepos) => this.categoryItemsRepos = itemRepos;
 
         // GET: api/CategoryItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItems() => Ok(await itemRepos.GetAll());
+        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItems() => Ok(await categoryItemsRepos.GetAll());
+        [HttpGet]
 
+        public async Task<ActionResult<IEnumerable<CategoryItem>>> GetCategoryItemByIndex([FromQuery] int index)
+        {
+            int manyInPage = 15;
+            return Ok(await categoryItemsRepos.GetByIndex(index, manyInPage));
+        }
         // GET: api/CategoryItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryItem>> GetCategoryItem(int id)
         {
             try
             {
-                return await itemRepos.Get(id);
+                return await categoryItemsRepos.Get(id);
             }
             catch
             {
@@ -41,16 +47,11 @@ namespace JewelryShop.Server.Controllers
         // PUT: api/CategoryItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoryItem(int id, CategoryItem categoryItem)
+        public async Task<IActionResult> PutCategoryItem( CategoryItem categoryItem)
         {
-            if (id != categoryItem.Id)
-            {
-                return BadRequest();
-            }
-
             try
             {
-                 await itemRepos.Update(categoryItem);
+                 await categoryItemsRepos.Update(categoryItem);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -67,7 +68,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                return await itemRepos.Insert(categoryItem);
+                return await categoryItemsRepos.Insert(categoryItem);
             }
             catch (Exception e)
             {
@@ -82,7 +83,7 @@ namespace JewelryShop.Server.Controllers
         {
             try
             {
-                await itemRepos.Delete(id);
+                await categoryItemsRepos.Delete(id);
             }
             catch (Exception e)
             {

@@ -17,14 +17,17 @@ namespace JewelryShop.Server.Controllers
     {
         private readonly IItemRepository itemRepos;
 
-        public ItemsController(IItemRepository itemRepos)
-        {
-            this.itemRepos = itemRepos;
-        }
+        public ItemsController(IItemRepository itemRepos) => this.itemRepos = itemRepos;
 
         // GET: api/Items
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> GetItems() =>Ok(await itemRepos.GetAll());
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Item>>> GetItemsByIndex([FromQuery]int index)
+        {
+            int manyInPage = 15;
+            return Ok(await itemRepos.GetByIndex(index, manyInPage));
+        }
         // GET: api/Items/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Item>> GetItem(int id)
@@ -42,13 +45,8 @@ namespace JewelryShop.Server.Controllers
         // PUT: api/Items/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem(int id, Item item)
+        public async Task<IActionResult> PutItem(Item item)
         {
-            if (id != item.Id)
-            {
-                return BadRequest();
-            }
-
             try
             {
                 await itemRepos.Update(item);

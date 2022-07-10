@@ -23,7 +23,13 @@ namespace JewelryShop.Server.Controllers
 
         // GET: api/CategoryProducts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryProduct>>> GetCategoryProducts() => Ok(await productRepos.GetAll());
+        public async Task<ActionResult<IEnumerable<CategoryProduct>>> GetCategoryProducts() => throw new NotImplementedException();
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CategoryProduct>>> GetCategoryProductByIndex([FromQuery] int index) 
+        {
+            int manyInPage = 15;
+            return Ok(await productRepos.GetByIndex(index, manyInPage));
+        }
         // GET: api/CategoryProducts/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryProduct>> GetCategoryProduct(int id)
@@ -41,13 +47,8 @@ namespace JewelryShop.Server.Controllers
         // PUT: api/CategoryProducts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoryProduct(int id, CategoryProduct categoryProduct)
+        public async Task<IActionResult> PutCategoryProduct( CategoryProduct categoryProduct)
         {
-            if (id != categoryProduct.Id)
-            {
-                return BadRequest();
-            }
-
             try
             {
                 await productRepos.Update(categoryProduct);
