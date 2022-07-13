@@ -19,6 +19,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ISizeItemRepository, SizeItemRepository>();
 builder.Services.AddScoped<ISizeProductRepository, SizeProductRepository>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+builder.Services.AddScoped<SaveRepository, SaveRepository>();
 //services
 builder.Services.AddScoped<ICategoryItemService,CategoryItemService>();
 builder.Services.AddScoped<ICategoryProductService,CategoryProductService>();

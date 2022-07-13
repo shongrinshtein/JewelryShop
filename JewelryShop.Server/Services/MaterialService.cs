@@ -19,6 +19,15 @@ namespace JewelryShop.Server.Services
 
         public async Task<Material> Insert(Material item) => await materialRepository.Insert(item);
 
+        public async Task ProduceWithMaterial(Material material)
+        {
+            var materialInDB = await Get(material.Id);
+            if (materialInDB == null) throw new NullReferenceException();
+            if (materialInDB.Quantity<material.Quantity) throw new Exception($" {material} is trying to produce {material.Quantity} which is bigger than in the database {materialInDB.Quantity}");
+            materialInDB.Quantity-=material.Quantity;
+            await materialRepository.Update(materialInDB);
+        }
+
         public async Task<bool> Update(Material item) => 
                             await materialRepository.Update(item);
     }

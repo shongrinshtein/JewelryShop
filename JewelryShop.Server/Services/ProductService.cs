@@ -1,4 +1,5 @@
 ﻿using JewelryShop.Data.Models;
+using JewelryShop.Data.Repository;
 using JewelryShop.Data.Repository.Interfaces;
 using JewelryShop.Server.IServices;
 
@@ -9,8 +10,13 @@ namespace JewelryShop.Server.Services
         private readonly IProductRepository productRepository;
         private readonly ISizeProductRepository sizeProductRepos;
         private readonly IPhotoURIRepository photoURIRepository;
-        public ProductService(IProductRepository productRepository, ISizeProductRepository sizeProductRepos, IPhotoURIRepository photoURIRepository)
+        private readonly SaveRepository saveRepository;
+        private readonly IItemService itemService;
+
+        public ProductService(IProductRepository productRepository, ISizeProductRepository sizeProductRepos, IPhotoURIRepository photoURIRepository, SaveRepository saveRepository, IItemService itemService)
         {
+            this.itemService = itemService;
+            this.saveRepository = saveRepository;
             this.sizeProductRepos = sizeProductRepos;
             this.productRepository = productRepository;
             this.photoURIRepository = photoURIRepository;
@@ -47,7 +53,20 @@ namespace JewelryShop.Server.Services
 
         public async Task<IEnumerable<Product>> GetByIndex(int index, int manyInPage) => await productRepository.GetByIndex(index, manyInPage);
 
-        public async Task<Product> Insert(Product item) => await productRepository.Insert(item);
+        //need to work on insert
+        public async Task<Product> Insert(Product productInsert)
+        {
+            foreach (var size in productInsert.Sizes)
+            {
+                if (size is SizeItem sizeItem)
+                {
+                    //itemService.ProduceWithitem(size.)
+                }
+            }
+            var product= await productRepository.Insert(productInsert);
+            await saveRepository.SaveChanges();
+            return product;
+        }
 
         public Task<bool> Update(Product item) => productRepository.Update(item);
     }

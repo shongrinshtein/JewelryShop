@@ -1,4 +1,5 @@
 ﻿using JewelryShop.Data.Models;
+using JewelryShop.Data.Repository;
 using JewelryShop.Data.Repository.Interfaces;
 using JewelryShop.Server.IServices;
 
@@ -10,8 +11,10 @@ namespace JewelryShop.Server.Services
         private readonly ISizeItemRepository sizeItemRepository;
         private readonly IPhotoURIRepository photoURIRepository;
         private readonly ICategoryItemRepository categoryItem;
-        public ItemService(ISizeItemRepository sizeItemRepository, IItemRepository itemRepository,IPhotoURIRepository photoURIRepository, ICategoryItemRepository categoryItem)
+        private readonly IMaterialService materialService;
+        public ItemService(ISizeItemRepository sizeItemRepository, IItemRepository itemRepository, IPhotoURIRepository photoURIRepository, ICategoryItemRepository categoryItem, IMaterialService materialService)
         {
+            this.materialService = materialService;
             this.categoryItem = categoryItem;
             this.photoURIRepository = photoURIRepository;
             this.sizeItemRepository = sizeItemRepository;
@@ -35,7 +38,7 @@ namespace JewelryShop.Server.Services
                 }
                 foreach (var category in item.Categories)
                 {
-                    if (itemRepository.GetByCategory(category)==null)
+                    if (itemRepository.GetByCategory(category) == null)
                         categoryItem.Delete(category.Id);
 
                 }
@@ -70,9 +73,20 @@ namespace JewelryShop.Server.Services
             return await itemRepository.Insert(item);
         }
 
-        public async Task<bool> Update(Item item)
+        public async Task ProduceWithItems(Item item)
         {
-            return await itemRepository.Update(item);
+            var itemInDB = await Get(item.Id);
+            if (itemInDB == null) throw new NullReferenceException();
+            foreach (var sizeItem  in item.Sizes)
+            {
+                var size = (SizeItem)sizeItem;
+                foreach (var material in size.Materials)
+                {
+                    await materialService.ProduceWithMaterial(material);
+                }
+            }
         }
+        public async Task<bool> Update(Item item) => await itemRepository.Update(item);
+
     }
 }

@@ -14,6 +14,7 @@ namespace JewelryShop.Data.Repository.Interfaces
         Task<T> Get(int? id);
         Task<IEnumerable<T>> GetAll();
         Task<IEnumerable<T>> GetByIndex(int index, int manyInPage);
+
     }
 
 }
