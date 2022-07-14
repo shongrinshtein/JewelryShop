@@ -20,7 +20,7 @@ namespace JewelryShop.Data.Repository
             var photoURI = await contextDB.PhotoURIs.FindAsync(id);
             if (photoURI == null) return false;
             contextDB.PhotoURIs.Remove(photoURI);
-            return true;
+            return true; 
         }
 
         public async Task<PhotoURI> Get(int? id)
