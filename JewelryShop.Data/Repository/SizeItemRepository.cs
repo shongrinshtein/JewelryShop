@@ -20,7 +20,6 @@ namespace JewelryShop.Data.Repository
             var sizeItem = await contextDB.SizeItems.FindAsync(id);
             if (sizeItem == null) return false;
             contextDB.SizeItems.Remove(sizeItem);
-            await contextDB.SaveChangesAsync();
             return true;
         }
 
@@ -46,7 +45,6 @@ namespace JewelryShop.Data.Repository
             if (sizeItem == null)
                 throw new ArgumentNullException("SizeItems is null");
             await contextDB.SizeItems.AddAsync(sizeItem);
-            await contextDB.SaveChangesAsync();
             return sizeItem;
         }
 
@@ -55,7 +53,6 @@ namespace JewelryShop.Data.Repository
             if (sizeItem == null)
                 throw new ArgumentNullException("SizeItems is null");
             contextDB.SizeItems.Update(sizeItem);
-            await contextDB.SaveChangesAsync();
             return true;
         }
     }

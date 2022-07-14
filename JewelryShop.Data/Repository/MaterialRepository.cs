@@ -20,7 +20,6 @@ namespace JewelryShop.Data.Repository
             var material = await contextDB.Materials.FindAsync(id);
             if (material == null) return false;
             contextDB.Materials.Remove(material);
-            await contextDB.SaveChangesAsync();
             return true;
         }
 
@@ -46,7 +45,6 @@ namespace JewelryShop.Data.Repository
             if (material == null)
                 throw new ArgumentNullException("Material is null");
             await contextDB.Materials.AddAsync(material);
-            await contextDB.SaveChangesAsync();
             return material;
         }
 
@@ -55,7 +53,6 @@ namespace JewelryShop.Data.Repository
             if (material == null)
                 throw new ArgumentNullException("Material is null");
             contextDB.Materials.Update(material);
-            await contextDB.SaveChangesAsync();
             return true;
         }
     }

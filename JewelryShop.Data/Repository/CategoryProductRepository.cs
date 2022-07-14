@@ -19,7 +19,6 @@ namespace JewelryShop.Data.Repository
             var category = await contextDB.CategoryProducts.FindAsync(id);
             if (category == null) return false;
             contextDB.CategoryProducts.Remove(category);
-            await contextDB.SaveChangesAsync();
             return true;
         }
 
@@ -45,7 +44,6 @@ namespace JewelryShop.Data.Repository
             if (category == null)
                 throw new ArgumentNullException("category product is null");
             await contextDB.CategoryProducts.AddAsync(category);
-            await contextDB.SaveChangesAsync();
             return category;
         }
 
@@ -54,7 +52,6 @@ namespace JewelryShop.Data.Repository
             if (category == null)
                 throw new ArgumentNullException("category product is null");
             contextDB.CategoryProducts.Update(category);
-            await contextDB.SaveChangesAsync();
             return true;
         }
     }

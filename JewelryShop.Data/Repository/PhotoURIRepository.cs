@@ -20,7 +20,6 @@ namespace JewelryShop.Data.Repository
             var photoURI = await contextDB.PhotoURIs.FindAsync(id);
             if (photoURI == null) return false;
             contextDB.PhotoURIs.Remove(photoURI);
-            await contextDB.SaveChangesAsync();
             return true;
         }
 
@@ -46,7 +45,6 @@ namespace JewelryShop.Data.Repository
             if (photoURI == null)
                 throw new ArgumentNullException("photoURI is null");
             await contextDB.PhotoURIs.AddAsync(photoURI);
-            await contextDB.SaveChangesAsync();
             return photoURI;
         }
 
@@ -55,7 +53,6 @@ namespace JewelryShop.Data.Repository
             if (photoURI == null)
                 throw new ArgumentNullException("PhotoURI is null");
             contextDB.PhotoURIs.Update(photoURI);
-            await contextDB.SaveChangesAsync();
             return true;
         }
     }
